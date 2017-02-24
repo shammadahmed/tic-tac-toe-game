@@ -1,4 +1,4 @@
-# vue-tic-tac-toe-game
+# Online Tic Tac Toe Game
 
 > A Vue.js project
 

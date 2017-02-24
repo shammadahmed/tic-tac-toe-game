@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="gameStatus bg-yellow" :class="gameStatusColor">
+		<div class="gameStatus" :class="gameStatusColor">
 			{{ gameStatusMessage }}
 		</div>
 		<table class="grid">
@@ -36,11 +36,12 @@ export default {
     	// maintains the status of the game: turn or win or draw
     	gameStatus: 'turn',
 
-    	gameStatusMessage: 'O\'s turn',
+    	gameStatusMessage: `O's turn`,
     	// status color is used as background color in the status bar
-    	// statusTurn (default) is yellow for turn
-			// statusWin is green for win
-			// statusDraw is purple for draw
+    	// it can hold the name of either of the following CSS classes
+    	// statusTurn (default) is yellow for a turn
+			// statusWin is green for a win
+			// statusDraw is purple for a draw
     	gameStatusColor: 'statusTurn',
     	// no. of moves played by both players in a single game (max = 9)
     	moves: 0,
@@ -93,8 +94,7 @@ export default {
   },
 
   methods: {
-  	// changes the active player to the non-active player with the help of the
-  	// nonActivePlayer computed property
+  	// changes the active player to the non-active player with the help of the nonActivePlayer computed property
   	changePlayer () {
 			this.activePlayer = this.nonActivePlayer
 		},
@@ -119,10 +119,6 @@ export default {
 			// fires win event for the App component to change the score
 			Event.$emit('win', this.activePlayer)
 
-			// fires gameFinished event to notify the Cell component to freeze 
-			// the cells
-			Event.$emit('gameFinished')
-
 			// sets the status to win
 			return 'win'
 		},
@@ -131,6 +127,7 @@ export default {
 		changeGameStatus () {
 			if (this.checkForWin()) {
 				 return this.gameIsWon()
+			// checks if the game is still not won and all cells are filled
 			} else if (this.moves === 9) {
 				// sets the status to draw
 				return 'draw'
@@ -163,7 +160,7 @@ export default {
 				// increments the number of moves
 				this.moves++
 
-				// stores the game status by calling the changeGameStatus function
+				// stores the game status by calling the changeGameStatus method
 				this.gameStatus = this.changeGameStatus()
 
 				this.changePlayer()

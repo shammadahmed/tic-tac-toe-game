@@ -7,35 +7,26 @@
 		props: ['name'],
 		data () {
 			return {
-				// enables the player to place a mark
-				freezed: false,
+				// holds either X or O to be displayed in the td
 				mark: ''
 			}	
 		},
 
 		methods: {
 			strike () {
-				if (! this.freezed) {
+				if (this.mark === '') {
 					// gets either X or O from the Grid component
 					this.mark = this.$parent.activePlayer
 					
-					this.freezed = true
-
-					// fires an event to notify the Grid component that a mark 
-					// is placed
+					// fires an event to notify the Grid component that a mark is placed
 					Event.$emit('strike', this.name)
 				}
 			}
 		},
 
 		created () {
-			// listens for if the game is finished and freezes its cells
-			Event.$on('gameFinished', () => this.freezed = true)
-
 			Event.$on('clearCell', () => {
 				this.mark = ''
-
-				this.freezed = false
 			})
 		}
 	}
