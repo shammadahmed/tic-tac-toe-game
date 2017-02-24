@@ -3,7 +3,10 @@
   "description": "A Vue.js project",
   "version": "1.0.0",
   "author": "Hammad Ahmed",
-  "private": true,
+  "private": false,
+  "engines": {
+    "node": "6.9.2"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
