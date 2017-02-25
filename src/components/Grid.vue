@@ -78,8 +78,6 @@ export default {
   		if (this.gameStatus === 'win') {
   			this.gameStatusColor = 'statusWin'
 
-  			this.gameStatusMessage = `${this.activePlayer} Wins !`
-
   			return
   		} else if (this.gameStatus === 'draw') {
   			this.gameStatusColor = 'statusDraw'
@@ -118,7 +116,8 @@ export default {
 		gameIsWon () {			
 			// fires win event for the App component to change the score
 			Event.$emit('win', this.activePlayer)
-
+			this.gameStatusMessage = `${this.activePlayer} Wins !`
+			
 			// sets the status to win
 			return 'win'
 		},
