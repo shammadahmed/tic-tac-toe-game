@@ -116,8 +116,12 @@ export default {
 		gameIsWon () {			
 			// fires win event for the App component to change the score
 			Event.$emit('win', this.activePlayer)
+
 			this.gameStatusMessage = `${this.activePlayer} Wins !`
-			
+
+			// fires an event for the Cell to freeze
+			Event.$emit('freeze')
+
 			// sets the status to win
 			return 'win'
 		},
@@ -125,7 +129,7 @@ export default {
 		// returns the game status to the gameStatus property
 		changeGameStatus () {
 			if (this.checkForWin()) {
-				 return this.gameIsWon()
+				return this.gameIsWon()
 			// checks if the game is still not won and all cells are filled
 			} else if (this.moves === 9) {
 				// sets the status to draw
@@ -137,13 +141,13 @@ export default {
 
 		// helper function for comparing cell values
 		areEqual () {
-		   var len = arguments.length;
+		  var len = arguments.length;
 
-		   // loops through each value and compares them with an empty sting and 
-		   // for inequality
-		   for (var i = 1; i < len; i++){
-		      if (arguments[i] === '' || arguments[i] !== arguments[i-1])
-		         return false;
+		  // loops through each value and compares them with an empty sting and 
+		  // for inequality
+		  for (var i = 1; i < len; i++){
+		    if (arguments[i] === '' || arguments[i] !== arguments[i-1])
+		      return false;
 		   }
 		   return true;
 		}
@@ -153,16 +157,16 @@ export default {
   	// listens for a strike made by the user on cell
   	// it is called by the Cell component
   	Event.$on('strike', (cellNumber) => {
-  			// sets either X or O in the clicked cell of the cells array
-				this.cells[cellNumber] = this.activePlayer
+			// sets either X or O in the clicked cell of the cells array
+			this.cells[cellNumber] = this.activePlayer
 
-				// increments the number of moves
-				this.moves++
+			// increments the number of moves
+			this.moves++
 
-				// stores the game status by calling the changeGameStatus method
-				this.gameStatus = this.changeGameStatus()
+			// stores the game status by calling the changeGameStatus method
+			this.gameStatus = this.changeGameStatus()
 
-				this.changePlayer()
+			this.changePlayer()
   	})
 
 		// listens for a restart button press
