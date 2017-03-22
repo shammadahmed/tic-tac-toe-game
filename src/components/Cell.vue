@@ -8,7 +8,7 @@
 		data () {
 			return {
 				// enables the player to place a mark
- 				freezed: false,
+ 				frozen: false,
 				// holds either X or O to be displayed in the td
 				mark: ''
 			}	
@@ -16,11 +16,11 @@
 
 		methods: {
 			strike () {
-				if (! this.freezed) {
+				if (! this.frozen) {
 					// gets either X or O from the Grid component
 					this.mark = this.$parent.activePlayer
 
-					this.freezed = true
+					this.frozen = true
 					
 					// fires an event to notify the Grid component that a mark is placed
 					Event.$emit('strike', this.name)
@@ -32,10 +32,10 @@
 			Event.$on('clearCell', () => {
 				this.mark = ''
 
-				this.freezed = false
+				this.frozen = false
 			})
 
-			Event.$on('freeze', () => this.freezed = true)
+			Event.$on('freeze', () => this.frozen = true)
 		}
 	}
 </script>
