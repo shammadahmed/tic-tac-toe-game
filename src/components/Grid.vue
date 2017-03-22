@@ -117,7 +117,10 @@ export default {
 			// fires win event for the App component to change the score
 			Event.$emit('win', this.activePlayer)
 
+<<<<<<< HEAD
 			// sets the game status message
+=======
+>>>>>>> 24cb964c21ebd6268e92b261e63624fad83529dd
 			this.gameStatusMessage = `${this.activePlayer} Wins !`
 
 			// fires an event for the Cell to freeze
