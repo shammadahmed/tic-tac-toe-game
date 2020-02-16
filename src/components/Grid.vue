@@ -88,7 +88,10 @@ export default {
   		}
 
 			this.gameStatusMessage = `${this.activePlayer}'s turn`
-  	}
+  	},
+	activePlayer(){
+		this.gameStatusMessage = `${this.activePlayer}'s turn`
+	}
   },
 
   methods: {
